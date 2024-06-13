@@ -1,0 +1,26 @@
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    background-color: #343a40;
+    color: white;
+    height: 100%;
+    padding: 10px;
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+
+    li {
+        margin-bottom: 10px;
+
+        a {
+            color: white;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}

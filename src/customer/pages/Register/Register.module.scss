@@ -1,0 +1,57 @@
+.register {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    // border: 1px solid #1f1b1b;
+    // width: 500px;
+    // height: 500px;
+    background-color: rgba(189, 158, 190, 0.441);
+    // align-items: center;
+    // display: flex;
+    // /* justify-content: space-around; */
+    flex-wrap: wrap;
+    // align-content: space-around;
+    flex-direction: column;
+    // padding: 5px 20px;
+}
+
+.login {
+    width: 300px; /* Độ rộng của form */
+    padding: 20px;
+    height: 300px;
+    border: 1px solid #a09999;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.login input {
+    width: 100%;
+    margin-bottom: 20px;
+    margin-top: 3px;
+    padding: 8px;
+}
+
+.login button {
+    width: 100%;
+    padding: 10px;
+    background-color: #5880ab; /* Màu nền của nút */
+    color: white; /* Màu chữ */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.login button:hover {
+    background-color: #0056b3; /* Màu nền khi di chuột qua */
+}
+
+.input {
+    padding: 5px 0 0 10px;
+}
+
+.sub-register {
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+}
