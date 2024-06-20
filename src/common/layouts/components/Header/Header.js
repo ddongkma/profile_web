@@ -1,23 +1,16 @@
-
+import React from 'react';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical, faEarthAsia, faCircleQuestion, faKeyboard, faCloudUpload, faCoins, faUser, faGear, faSignOut } from '@fortawesome/free-solid-svg-icons';
-
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 
-
-import config from '~/common/configs'
-
-import Button from '~/common/components/Button'
 import styles from './Header.module.scss';
-import images from '~/common/assets/images';
 import Menu from '~/common/components/Popper/Menu';
 import Image from '~/common/components/Image';
-import Search from '../Search';
-import { Link } from 'react-router-dom';
-
-const cx = classNames.bind(styles)
+import { Link, useNavigate } from 'react-router-dom';
+import { useUser } from '~/common/context/UserContext';
+const cx = classNames.bind(styles);
 
 const MENU_ITEM = [
     {
@@ -26,166 +19,9 @@ const MENU_ITEM = [
         children: {
             title: 'Language',
             data: [
-                {
-                    code: 'en',
-                    title: 'English'
-                },
-                {
-                    code: 'vi',
-                    title: 'Viet Nam'
-                },
-                {
-                    code: 'en',
-                    title: 'English'
-                },
-                {
-                    code: 'vi',
-                    title: 'Viet Nam'
-                },
-                {
-                    code: 'en',
-                    title: 'English'
-                },
-                {
-                    code: 'vi',
-                    title: 'Viet Nam'
-                },
-                {
-                    code: 'en',
-                    title: 'English'
-                },
-                {
-                    code: 'vi',
-                    title: 'Viet Nam'
-                },
-                {
-                    code: 'en',
-                    title: 'English'
-                },
-                {
-                    code: 'vi',
-                    title: 'Viet Nam'
-                },
-                {
-                    code: 'en',
-                    title: 'English'
-                },
-                {
-                    code: 'vi',
-                    title: 'Viet Nam'
-                },
-                {
-                    code: 'en',
-                    title: 'English'
-                },
-                {
-                    code: 'vi',
-                    title: 'Viet Nam'
-                },
-                {
-                    code: 'en',
-                    title: 'English'
-                },
-                {
-                    code: 'vi',
-                    title: 'Viet Nam'
-                },
-                {
-                    code: 'en',
-                    title: 'English'
-                },
-                {
-                    code: 'vi',
-                    title: 'Viet Nam'
-                },
-                {
-                    code: 'en',
-                    title: 'English'
-                },
-                {
-                    code: 'vi',
-                    title: 'Viet Nam'
-                },
-                {
-                    code: 'en',
-                    title: 'English'
-                },
-                {
-                    code: 'vi',
-                    title: 'Viet Nam'
-                },
-                {
-                    code: 'en',
-                    title: 'English'
-                },
-                {
-                    code: 'vi',
-                    title: 'Viet Nam'
-                },
-                {
-                    code: 'en',
-                    title: 'English'
-                },
-                {
-                    code: 'vi',
-                    title: 'Viet Nam'
-                },
-                {
-                    code: 'en',
-                    title: 'English'
-                },
-                {
-                    code: 'vi',
-                    title: 'Viet Nam'
-                },
-                {
-                    code: 'en',
-                    title: 'English'
-                },
-                {
-                    code: 'vi',
-                    title: 'Viet Nam'
-                },
-                {
-                    code: 'en',
-                    title: 'English'
-                },
-                {
-                    code: 'vi',
-                    title: 'Viet Nam'
-                },
-                {
-                    code: 'en',
-                    title: 'English'
-                },
-                {
-                    code: 'vi',
-                    title: 'Viet Nam'
-                },
-                {
-                    code: 'en',
-                    title: 'English'
-                },
-                {
-                    code: 'vi',
-                    title: 'Viet Nam'
-                },
-                {
-                    code: 'en',
-                    title: 'English'
-                },
-                {
-                    code: 'vi',
-                    title: 'Viet Nam'
-                },
-                {
-                    code: 'en',
-                    title: 'English'
-                },
-                {
-                    code: 'vi',
-                    title: 'Viet Nam'
-                },
+                { code: 'en', title: 'English' },
+                { code: 'vi', title: 'Vietnamese' },
+                // Add other languages here
             ]
         }
     },
@@ -198,7 +34,8 @@ const MENU_ITEM = [
         icon: <FontAwesomeIcon icon={faKeyboard} />,
         title: 'Keyboard shortcuts'
     }
-]
+];
+
 const userMenu = [
     {
         icon: <FontAwesomeIcon icon={faUser} />,
@@ -219,57 +56,47 @@ const userMenu = [
     {
         icon: <FontAwesomeIcon icon={faSignOut} />,
         title: 'Log Out',
-        to: '/logout',
+        to: '/',
         separate: true,
     }
-]
+];
+
 function Header() {
-    const currentUser = true;
-
+    const currentUser = {
+        name: 'Doan Dinh Dong',
+        avatar: 'https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/53bd7e990293727d1645f0adbc57cc6e~c5_100x100.jpeg?x-expires=1672495200&x-signature=23wLLLFaNOwTshJdI68Og0mwrbo%3D'
+    };
+    const { user, logout } = useUser();
+    const navigate = useNavigate();
     const handleMenuChange = (menuItem) => {
+        if (menuItem.title === 'Log Out') {
+            logout();
+            navigate('/');
+        }
+    };
 
-    }
 
-    return <header className={cx('wrapper')}>
+    return (
+        <header className={cx('wrapper')}>
+            <div className={cx('inner')}>
+                {/* Place logo or other left-aligned items here
+                <div className={cx('logo-link')}>
+                    <Link to={config.routes.home}>
+                        <img src={images.logo} alt="tiktok" />
+                    </Link>
+                </div> */}
 
-        <div className={cx('inner')}>
-            <Link to={config.routes.home} className={cx('logo-link')}>
-                <img src={images.logo} alt="tiktok"></img>
-            </Link>
-
-            <Search />
-            <div className={cx('actions')}>
-                {currentUser ? (
-                    <>
-                        <Tippy content='Upload Video' placement='bottom' delay={[0, 200]} >
-                            <button
-                                className={cx('action-btn')}
-                            >
-                                <FontAwesomeIcon icon={faCloudUpload} />
-                            </button>
-                        </Tippy>
-                    </>
-                ) : (
-                    <>
-                        <Button text>Upload</Button>
-                        <Button primary >Login</Button>
-
-                    </>
-                )}
-                <Menu items={currentUser ? userMenu : MENU_ITEM} onChange={handleMenuChange}>
-                    {currentUser ? (
-                        <Image src='https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/53bd7e990293727d1645f0adbc57cc6e~c5_100x100.jpeg?x-expires=1672495200&x-signature=23wLLLFaNOwTshJdI68Og0mwrbo%3D'
-                            className={cx('user-avatar')}
-                            alt='Doan Dinh Dong' />
-                    ) : (
-                        <button className={cx('more-btn')}>
-                            <FontAwesomeIcon icon={faEllipsisVertical} />
-                        </button>
-                    )}
-                </Menu>
+                <div className={cx('actions')}>
+                    <Menu items={userMenu} onChange={handleMenuChange}>
+                        <div className={cx('user-info')}>
+                            <span className={cx('user-name')}>{user?.fullName}</span>
+                            <Image src={currentUser.avatar} className={cx('user-avatar')} alt={currentUser.name} />
+                        </div>
+                    </Menu>
+                </div>
             </div>
-        </div>
-    </header >
+        </header>
+    );
 }
 
 export default Header;

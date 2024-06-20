@@ -25,7 +25,7 @@ const ProfileList = ({ profiles, total, page, offset, setPage, handleDelete, han
             <table>
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>No</th>
                         <th>ISDN</th>
                         <th>Action Description</th>
                         <th>User Collect</th>
@@ -41,9 +41,9 @@ const ProfileList = ({ profiles, total, page, offset, setPage, handleDelete, han
                     </tr>
                 </thead>
                 <tbody>
-                    {profiles.map(profile => (
+                    {profiles.map((profile, index) => (
                         <tr key={profile.id}>
-                            <td className={cx('id')}>{profile.id}</td>
+                            <td className={cx('no')}>{page * offset + index + 1}</td>
                             <td className={cx('isdn')}>{profile.isdn}</td>
                             <td className={cx('actionDescription')}>{profile.actionDescription}</td>
                             <td className={cx('userCollect')}>{profile.userCollect}</td>
@@ -56,10 +56,10 @@ const ProfileList = ({ profiles, total, page, offset, setPage, handleDelete, han
                             <td className={cx('subStatus')}>{profile.subStatus}</td>
                             <td className={cx('auditor')}>{profile.auditor}</td>
                             <td className={cx('actions')}>
-                                <button onClick={() => handleEdit(profile.id)} className={cx('editButton')}>
+                                <button onClick={() => handleEdit(profile)} className={cx('editButton')}>
                                     <FontAwesomeIcon icon={faPenToSquare} />
                                 </button>
-                                <button onClick={() => handleDelete(profile.id)} className={cx('deleteButton')}>
+                                <button onClick={() => handleDelete(profile)} className={cx('deleteButton')}>
                                     <FontAwesomeIcon icon={faTrash} />
                                 </button>
                             </td>

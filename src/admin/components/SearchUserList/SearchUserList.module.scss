@@ -1,0 +1,109 @@
+.staffList {
+    margin-top: 20px;
+}
+
+.staffList h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.staffList table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.staffList th,
+.staffList td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.staffList th {
+    background-color: #e6e6ff; /* Light purple for headers */
+}
+
+.staffList tbody tr:hover {
+    background-color: #f2f2f2;
+}
+
+/* Customize column colors */
+// .no {
+//     color: #0066cc;
+// }
+// .staffCode {
+//     color: #ff0000;
+// }
+// .role {
+//     color: #ffa500;
+// }
+// .shopCode {
+//     color: #800080;
+// }
+// .name {
+//     color: #0000ff;
+// }
+// .birthday {
+//     color: #ff00ff;
+// }
+// .tel {
+//     color: #ff6600;
+// }
+// .createDate {
+//     color: #663300;
+// }
+// .status {
+//     color: #333333;
+// }
+// .startDate {
+//     color: #990000;
+// }
+
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.pagination button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #0066cc;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+}
+
+.pagination button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.editButton,
+.deleteButton {
+    background-color: transparent; /* Transparent background */
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-right: 5px;
+    font-size: 14px; /* Smaller icon size */
+}
+
+.editButton {
+    color: #4caf50; /* Green for edit icon */
+}
+
+.deleteButton {
+    color: #f44336; /* Red for delete icon */
+}
+
+.editButton:hover,
+.deleteButton:hover {
+    opacity: 0.8;
+}
+
+.actions {
+    display: flex;
+    align-items: center; /* Ensure buttons are aligned */
+}

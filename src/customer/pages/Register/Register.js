@@ -1,16 +1,25 @@
 import classNames from 'classnames/bind';
 import styles from './Register.module.scss';
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useUser } from '~/common/context/UserContext';
+import { toast } from 'react-toastify';
+import { useToast } from '~/common/context/ToastContext';
+
 
 const cx = classNames.bind(styles)
 const Register = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    // const history = useHistory();
     const navigate = useNavigate();
-
+    const { user, login } = useUser();
+    const { addToast } = useToast();
+    useEffect(() => {
+        if (user) {
+            navigate('/admin'); // Redirect to the admin page if already logged in
+        }
+    }, [user, navigate]);
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -19,11 +28,34 @@ const Register = () => {
             if (response.data.staffId != null) {
                 // Lưu token vào local storage hoặc Redux store
                 localStorage.setItem('access_token', response.data.accessToken);
-                navigate('/admin');
-                // window.location.href = '/home';
+                login(response.data);
+
+                if (response.data.role === 'Admin') {
+                    addToast({
+                        title: 'Thành công!',
+                        message: 'Đăng nhập thành công',
+                        type: 'success',
+                        duration: 5000,
+                    });
+                    navigate('/admin');
+                } else {
+                    navigate('/profile');
+                }
+            } else {
+                addToast({
+                    title: '',
+                    message: response.data.error,
+                    type: 'error',
+                    duration: 5000,
+                });
             }
         } catch (err) {
-            // setError(err.response.data.message);
+            addToast({
+                title: '',
+                message: err.message,
+                type: 'error',
+                duration: 5000,
+            });
             console.log(err);
         }
         // history.push('/home');

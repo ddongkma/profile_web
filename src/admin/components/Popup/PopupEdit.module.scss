@@ -1,4 +1,4 @@
-.popupEdit {
+.modal {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -7,43 +7,61 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    z-index: 1000; // Đảm bảo popup hiển thị trên cùng
+    z-index: 1000;
+    max-width: 700px; /* Adjust width as needed */
+    width: 100%;
 }
 
-.popupEdit h2 {
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999; /* Ensure overlay is below the modal */
+}
+
+.heading {
     font-size: 20px;
     margin-bottom: 20px;
 }
 
-.popupEdit form {
+.form {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 20px; /* Add gap between items */
 }
 
-.popupEdit .formGroup {
+.formGroup {
+    flex: 1 1 calc(50% - 20px); /* Two fields per row with gap */
     margin-bottom: 15px;
 }
 
-.popupEdit label {
+label {
     font-weight: bold;
     margin-bottom: 5px;
+    display: block;
 }
 
-.popupEdit input[type='text'] {
+input[type='text'],
+input[type='date'] {
     width: 100%;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
     outline: none;
+    box-sizing: border-box;
 }
 
-.popupEdit .buttons {
+.buttons {
     display: flex;
     justify-content: flex-end;
     margin-top: 20px;
+    width: 100%;
 }
 
-.popupEdit button {
+button {
     padding: 8px 16px;
     margin-left: 10px;
     border: none;
@@ -52,16 +70,16 @@
     transition: background-color 0.3s ease;
 }
 
-.popupEdit button.saveButton {
+.saveButton {
     background-color: #4caf50;
     color: white;
 }
 
-.popupEdit button.cancelButton {
+.cancelButton {
     background-color: #f44336;
     color: white;
 }
 
-.popupEdit button:hover {
-    background-color: rgba(0, 0, 0, 0.1);
+button:hover {
+    opacity: 0.8;
 }

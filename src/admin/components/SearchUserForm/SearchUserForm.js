@@ -1,33 +1,24 @@
 import React, { useState } from 'react';
 import classNames from 'classnames/bind';
-import styles from './SearchForm.module.scss';
+import styles from './SearchUserFrom.module.scss';
 
 const cx = classNames.bind(styles);
 
-const SearchForm = ({ filters, onFilterChange, onSearch, onAddProfile, shopcodes }) => {
+const SearchUserForm = ({ filters, onFilterChange, onSearch, onAddProfile, shopcodes, roles }) => {
 
-    const [branchCode, setBranchCode] = useState('');
-    const [isdn, setIsdn] = useState('');
+    const [shopId, setShopId] = useState('');
+    const [roleId, setRoleId] = useState('');
     const [status, setStatus] = useState('');
-    const [substatus, setSubstatus] = useState('');
+    const [staffCode, setStaffCode] = useState('');
     const [shopCode, setShopCode] = useState('');
     const [fromDate, setFromDate] = useState('');
     const [toDate, setToDate] = useState('');
     const statusOptions = [
         { value: '', label: 'Select a status' },
-        { value: '0', label: 'Lackfile' },
-        { value: '1', label: 'Fullfile' }
+        { value: '0', label: 'Disable' },
+        { value: '1', label: 'Active' }
     ];
 
-    const substatusOptions = {
-        '': [{ value: '', label: 'Select a substatus' }],
-        '1': [
-            { value: '', label: 'Select a substatus' },
-            { value: '1', label: 'Substatus 1' },
-            { value: '2', label: 'Substatus 2' },
-
-        ]
-    };
     const formatDate = (date) => {
         const d = new Date(date);
         let day = d.getDate();
@@ -43,16 +34,13 @@ const SearchForm = ({ filters, onFilterChange, onSearch, onAddProfile, shopcodes
     const handleSearch = (e) => {
         e.preventDefault();
         const searchCriteria = {
-            branchCode,
-            isdn,
+            shopId,
+            roleId,
             status,
-            shopCode,
+            staffCode,
             fromDate: fromDate ? formatDate(fromDate) : '',
             toDate: toDate ? formatDate(toDate) : ''
         };
-        if (status === '1') {
-            searchCriteria.subStatus = substatus;
-        }
         onSearch(searchCriteria);
     };
 
@@ -67,24 +55,28 @@ const SearchForm = ({ filters, onFilterChange, onSearch, onAddProfile, shopcodes
                         <select
                             id="branchCode"
                             value={filters.branchCode}
-                            onChange={(e) => setBranchCode(e.target.value)}
+                            onChange={(e) => setShopId(e.target.value)}
                             className={cx('input')}
                         >
                             <option value="">-----Select a branch-----</option>
                             {shopcodes.map((code) => (
-                                <option key={code.shopCode} value={code.shopCode}>{code.shopCode + "-" + code.name}</option>
+                                <option key={code.shopId} value={code.shopId}>{code.shopCode + "-" + code.name}</option>
                             ))}
                         </select>
                     </div>
                     <div className={cx('filter-container')}>
-                        <label htmlFor="isdn">ISDN:</label>
-                        <input
-                            type="text"
-                            id="isdn"
-                            value={isdn}
-                            onChange={(e) => setIsdn(e.target.value)}
+                        <label htmlFor="roleId">Roles:</label>
+                        <select
+                            id="roleId"
+                            value={filters.roleId}
+                            onChange={(e) => setRoleId(e.target.value)}
                             className={cx('input')}
-                        />
+                        >
+                            <option value="">-----Select a Role-----</option>
+                            {roles.map((role) => (
+                                <option key={role.roleId} value={role.roleId}>{role.roleName}</option>
+                            ))}
+                        </select>
                     </div>
                 </div>
                 <div className={cx('row')}>
@@ -101,30 +93,15 @@ const SearchForm = ({ filters, onFilterChange, onSearch, onAddProfile, shopcodes
                             ))}
                         </select>
                     </div>
-                    {status === '1' && (
-                        <div className={cx('filter-container')}>
-                            <label htmlFor="substatus">Substatus:</label>
-                            <select
-                                id="substatus"
-                                value={substatus}
-                                onChange={(e) => setSubstatus(e.target.value)}
-                                className={cx('input')}
-                            >
-                                {substatusOptions[status].map(option => (
-                                    <option key={option.value} value={option.value}>{option.label}</option>
-                                ))}
-                            </select>
-                        </div>
-                    )}
                 </div>
                 <div className={cx('row')}>
                     <div className={cx('filter-container')}>
-                        <label htmlFor="shopCode">Shop Code:</label>
+                        <label htmlFor="staffCode">Staff Code:</label>
                         <input
                             type="text"
-                            id="shopCode"
-                            value={shopCode}
-                            onChange={(e) => setShopCode(e.target.value)}
+                            id="staffCode"
+                            value={staffCode}
+                            onChange={(e) => setStaffCode(e.target.value)}
                             className={cx('input')}
                         />
                     </div>
@@ -152,12 +129,12 @@ const SearchForm = ({ filters, onFilterChange, onSearch, onAddProfile, shopcodes
                     </div>
                 </div>
                 <div className={cx('buttons')}>
-                    <button type="submit" className={cx('search-button')}>Search</button>
-                    <button type="button" onClick={onAddProfile} className={cx('add-button')}>Add Profile</button>
+                    <button type="submit" className={cx('search-button')}>Search Staff</button>
+                    <button type="button" onClick={onAddProfile} className={cx('add-button')}>Add Staff</button>
                 </div>
             </form>
         </div>
     );
 };
 
-export default SearchForm;
+export default SearchUserForm;
