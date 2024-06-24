@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import classNames from 'classnames/bind';
-import styles from './SearchForm.module.scss';
+import styles from './SearchProfileFormC.module.scss';
 
 const cx = classNames.bind(styles);
 
-const SearchForm = ({ filters, onFilterChange, onSearch, onAddProfile, shopcodes }) => {
+const SearchProfileFormC = ({ filters, onFilterChange, onSearch, shopcodes }) => {
 
     const [branchCode, setBranchCode] = useState('');
     const [isdn, setIsdn] = useState('');
@@ -72,7 +72,7 @@ const SearchForm = ({ filters, onFilterChange, onSearch, onAddProfile, shopcodes
                             className={cx('input')}
                         >
                             <option value="">-----Select a branch-----</option>
-                            {shopcodes.map((code) => (
+                            {Array.isArray(shopcodes) && shopcodes.map((code) => (
                                 <option key={code.shopCode} value={code.shopCode}>{code.shopCode + "-" + code.name}</option>
                             ))}
                         </select>
@@ -154,11 +154,10 @@ const SearchForm = ({ filters, onFilterChange, onSearch, onAddProfile, shopcodes
                 </div>
                 <div className={cx('buttons')}>
                     <button type="submit" className={cx('search-button')}>Search</button>
-                    <button type="button" onClick={onAddProfile} className={cx('add-button')}>Add Profile</button>
                 </div>
             </form>
         </div>
     );
 };
 
-export default SearchForm;
+export default SearchProfileFormC;

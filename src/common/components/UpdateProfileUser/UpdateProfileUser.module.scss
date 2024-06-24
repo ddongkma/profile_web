@@ -1,0 +1,97 @@
+/* UpdateProfileUser.module.scss */
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 450px; /* Tăng kích thước modal */
+    max-width: 90%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+
+    h2 {
+        font-size: 1.8rem; /* Tăng kích thước tiêu đề */
+        margin: 0;
+    }
+
+    .close-button {
+        background: none;
+        border: none;
+        font-size: 1.5rem; /* Tăng kích thước nút đóng */
+        cursor: pointer;
+        color: #555;
+        padding: 0;
+    }
+    .close-button:hover {
+        color: #000;
+    }
+}
+
+.form-group {
+    margin-bottom: 20px; /* Tăng khoảng cách giữa các nhóm input */
+
+    label {
+        display: block;
+        margin-bottom: 10px; /* Tăng khoảng cách giữa label và input */
+        color: #333;
+        font-size: 1.2rem; /* Tăng kích thước font label */
+    }
+
+    input {
+        width: 100%;
+        padding: 12px; /* Tăng padding của input */
+        border: 1px solid #ccc;
+        border-radius: 6px; /* Tăng độ cong của góc input */
+        font-size: 1.4rem; /* Tăng kích thước font input */
+    }
+}
+
+.button-group {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px; /* Tăng khoảng cách giữa các button và form */
+
+    button {
+        margin-left: 15px; /* Tăng khoảng cách giữa các button */
+        padding: 12px 24px; /* Tăng padding của button */
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        background-color: #007bff;
+        color: white;
+        font-size: 1.4rem; /* Tăng kích thước font button */
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: #0056b3;
+        }
+
+        &:first-child {
+            background-color: #6c757d;
+
+            &:hover {
+                background-color: #5a6268;
+            }
+        }
+    }
+}

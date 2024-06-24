@@ -11,7 +11,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastProvider } from './common/context/ToastContext';
 import Admin from './admin/page/Admin';
-import Profile from './customer/pages/Profile';
+import Profile from './customer/pages/Profile/Profile';
 
 function App() {
   return (
@@ -26,7 +26,7 @@ function App() {
                 <Route path="users" element={<ProtectedRoute component={UserManagement} />} />
                 <Route path="profile" element={<ProtectedRoute component={ProfileManagement} />} />
               </Route>
-              <Route path="/profile/*" element={<ProtectedRoute component={Profile} />} />
+              {/* <Route path="/profile/*" element={<ProtectedRoute component={Profile} />} /> */}
               {publicRoutes.map((route, index) => {
                 const Page = route.component;
                 let Layout = DefaultLayout;

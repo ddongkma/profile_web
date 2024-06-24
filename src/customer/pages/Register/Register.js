@@ -4,29 +4,30 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '~/common/context/UserContext';
-import { toast } from 'react-toastify';
 import { useToast } from '~/common/context/ToastContext';
 
+const cx = classNames.bind(styles);
 
-const cx = classNames.bind(styles)
 const Register = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
     const { user, login } = useUser();
     const { addToast } = useToast();
+
     useEffect(() => {
         if (user) {
             navigate('/admin'); // Redirect to the admin page if already logged in
         }
     }, [user, navigate]);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             const response = await axios.post('http://localhost:9091/login', { email, password });
             console.log(response.data);
             if (response.data.staffId != null) {
-                // Lưu token vào local storage hoặc Redux store
+                // Save token to local storage or Redux store
                 localStorage.setItem('access_token', response.data.accessToken);
                 login(response.data);
 
@@ -58,18 +59,18 @@ const Register = () => {
             });
             console.log(err);
         }
-        // history.push('/home');
     };
+
     const changeRegister = () => {
 
     };
 
     return (
         <div className={cx('register')}>
-            <h2>Đăng Nhập</h2>
-            <form onSubmit={handleSubmit} className={cx('login')} >
-                <div >
-                    <label htmlFor="">Email</label>
+            <form onSubmit={handleSubmit} className={cx('login')}>
+                <h2>Đăng Nhập</h2>
+                <div>
+                    <label htmlFor="email">Email</label>
                     <input
                         className={cx('input')}
                         type="email"
@@ -79,8 +80,8 @@ const Register = () => {
                         required
                     />
                 </div>
-                <div >
-                    <label htmlFor="">Password</label>
+                <div>
+                    <label htmlFor="password">Password</label>
                     <input
                         className={cx('input')}
                         type="password"
@@ -92,11 +93,10 @@ const Register = () => {
                 </div>
                 <button type="submit">Đăng Nhập</button>
                 <div className={cx('sub-register')}>
-                    <a href="">Đăng ký</a>
-                    <a href="">Quên mật khẩu?</a>
+                    {/* <a href="#">Đăng ký</a>
+                    <a href="#">Quên mật khẩu?</a> */}
                 </div>
             </form>
-
         </div>
     );
 };

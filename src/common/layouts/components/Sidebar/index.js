@@ -16,17 +16,29 @@ const cx = classNames.bind(styles)
 function Sidebar() {
     const { user } = useUser()
     const isAdmin = user && user.role === 'Admin';
-
+    const isBranchMangement = user && user.role === 'Branch Manager'
     return <aside className={cx('wrapper')}>
         <Menu>
-            {isAdmin ? (
+            {isAdmin && (
                 <>
                     <MenuItem title="Profile Manager" to={config.routes.profilemanagement} icon={<HomeIcon />} />
                     <MenuItem title="User Manager" to={config.routes.usermanagement} icon={<UserGroupIcon />} />
-                </>) : <>
-                <MenuItem title="Your Profile" to={config.routes.profile} icon={<HomeIcon />} />
-            </>
-            }
+                </>
+            )}
+
+            {isBranchMangement && (
+                <>
+                    <MenuItem title="Search and Upload Profile" to={config.routes.profile} icon={<HomeIcon />} />
+                    <MenuItem title="Audit Profile" to={config.routes.audit} icon={<HomeIcon />} />
+                    <MenuItem title="Profile Log" to={config.routes.log} icon={<HomeIcon />} />
+                </>
+            )}
+            {!isAdmin && !isBranchMangement && (
+                <>
+                    <MenuItem title="Search and Upload Profile" to={config.routes.profile} icon={<HomeIcon />} />
+                    <MenuItem title="Profile Log" to={config.routes.log} icon={<UserGroupIcon />} />
+                </>
+            )}
         </Menu>
 
     </aside>

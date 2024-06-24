@@ -8,6 +8,7 @@ import PopupDelete from '~/admin/components/Popup/PopupDelete';
 import PopupEdit from '~/admin/components/Popup/PopupEdit';
 import AddProfilePopup from '~/admin/components/AddProfilePopup/AddProfilePopup';
 import { useUser } from '~/common/context/UserContext';
+import { useToast } from '~/common/context/ToastContext';
 
 const cx = classNames.bind(styles);
 
@@ -28,6 +29,7 @@ const ProfileManagement = () => {
     });
     const [shopcodes, setShopcodes] = useState([]);
     const { user, logout } = useUser();
+    const { addToast } = useToast();
     useEffect(() => {
         fetchShopCodes()
         fetchProfiles(page);
@@ -78,7 +80,6 @@ const ProfileManagement = () => {
         }
     };
     const handleSearch = (searchCriteria) => {
-
         axios.post('http://localhost:9091/api/audit/profile/search', searchCriteria)
             .then(response => {
                 const profileData = response.data.records.map(profile => ({
@@ -94,6 +95,7 @@ const ProfileManagement = () => {
     };
 
     const openAddProfilePopup = () => {
+
         setShowAddProfilePopup(true);
     };
 
@@ -104,15 +106,35 @@ const ProfileManagement = () => {
     const handleDelete = async (id) => {
         try {
             const token = localStorage.getItem('access_token');
-            await axios.delete(`http://localhost:9091/api/audit/profile/${id}`, {
+            const response = await axios.post(`http://localhost:9091/api/profile-management/delete-profile/${id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             });
+            if (response.status === 200) {
+                addToast({
+                    title: 'Thành công!',
+                    message: "Xóa hồ sơ thành công!",
+                    type: 'success',
+                    duration: 5000,
+                });
+            } else {
+                addToast({
+                    title: 'Lỗi!',
+                    message: response.data.error,
+                    type: 'error',
+                    duration: 5000,
+                });
+            }
             fetchProfiles();
             setIsDeletePopupOpen(false);
         } catch (err) {
-            console.error('Error deleting profile:', err);
+            addToast({
+                title: 'Lỗi!',
+                message: err.message,
+                type: 'error',
+                duration: 5000,
+            });
         }
     };
 
@@ -120,15 +142,35 @@ const ProfileManagement = () => {
         try {
             const token = localStorage.getItem('access_token');
             console.log(updatedProfile);
-            await axios.post(`http://localhost:9091/api/profile-management/${updatedProfile.id}`, updatedProfile, {
+            const rp = await axios.post(`http://localhost:9091/api/profile-management/update/${updatedProfile.id}`, updatedProfile, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             });
+            if (rp.status === 200) {
+                addToast({
+                    title: 'Thành công!',
+                    message: "Sửa hồ sơ thành công!",
+                    type: 'success',
+                    duration: 5000,
+                });
+            } else {
+                addToast({
+                    title: 'Lỗi!',
+                    message: rp.data.error,
+                    type: 'error',
+                    duration: 5000,
+                });
+            }
             fetchProfiles();
             setIsEditPopupOpen(false);
         } catch (err) {
-            console.error('Error editing profile:', err);
+            addToast({
+                title: 'Lỗi!',
+                message: err.message,
+                type: 'error',
+                duration: 5000,
+            });
         }
     };
 
@@ -150,6 +192,9 @@ const ProfileManagement = () => {
             ...prevFilters,
             [key]: value
         }));
+    };
+    const handleAddProfile = (newProfile) => {
+        setProfiles([...profiles, newProfile]);
     };
     return (
         <div className={cx('profile-management')}>
@@ -179,7 +224,14 @@ const ProfileManagement = () => {
                     profile={selectedProfile}
                 />
             }
-            {showAddProfilePopup && <AddProfilePopup onClose={closeAddProfilePopup} />}
+            {showAddProfilePopup &&
+                <AddProfilePopup
+                    isOpen={showAddProfilePopup}
+                    onClose={closeAddProfilePopup}
+                    onSave={handleAddProfile}
+                    shopcodes={shopcodes}
+                />
+            }
         </div>
     );
 };

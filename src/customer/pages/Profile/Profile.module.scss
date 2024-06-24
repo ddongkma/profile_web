@@ -1,0 +1,41 @@
+.profile-management {
+    position: relative; /* Để tạo vị trí tương đối cho .loading */
+}
+
+.loading {
+    position: absolute; /* Đặt vị trí tuyệt đối để che phủ phần nội dung */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(228, 219, 219, 0.4); /* Màu nền với độ mờ */
+    display: flex; /* Hiển thị phần nội dung ở dạng dọc */
+    justify-content: center; /* Căn chỉnh theo chiều ngang */
+    align-items: center; /* Căn chỉnh theo chiều dọc */
+    z-index: 999; /* Để chắc chắn phần loading hiển thị trên các thành phần khác */
+}
+
+.loading .spinner {
+    font-size: 4rem; /* Kích thước biểu tượng */
+    color: rgb(223, 30, 30); /* Màu chữ */
+    animation: spin 1s linear infinite; /* Hiệu ứng quay */
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.profile-list {
+    opacity: 1; /* Mặc định hiển thị nội dung */
+    transition: opacity 0.3s ease-in-out; /* Hiệu ứng chuyển đổi độ mờ */
+}
+
+.loading + .profile-list {
+    opacity: 0; /* Ẩn nội dung khi loading */
+    pointer-events: none; /* Vô hiệu hóa các sự kiện click */
+}

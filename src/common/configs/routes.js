@@ -6,9 +6,10 @@ const routes = {
     profile: '/profile',
     upload: '/upload',
     live: '/live',
-    // admin: '/admin',
-    usermanagement: '/users',
-    profilemanagement: '/profiles'
+    audit: '/audit',
+    log: '/log',
+    usermanagement: '/admin/users',
+    profilemanagement: '/admin/profiles'
 }
 
 export default routes;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical, faEarthAsia, faCircleQuestion, faKeyboard, faCloudUpload, faCoins, faUser, faGear, faSignOut } from '@fortawesome/free-solid-svg-icons';
@@ -10,6 +10,7 @@ import Menu from '~/common/components/Popper/Menu';
 import Image from '~/common/components/Image';
 import { Link, useNavigate } from 'react-router-dom';
 import { useUser } from '~/common/context/UserContext';
+import UpdateProfileUser from '~/common/components/UpdateProfileUser/UpdateProfileUser';
 const cx = classNames.bind(styles);
 
 const MENU_ITEM = [
@@ -40,19 +41,9 @@ const userMenu = [
     {
         icon: <FontAwesomeIcon icon={faUser} />,
         title: 'View Profile',
-        to: '/@DOng'
+        action: 'viewProfile',
+
     },
-    {
-        icon: <FontAwesomeIcon icon={faCoins} />,
-        title: 'Get Coins',
-        to: '/coin'
-    },
-    {
-        icon: <FontAwesomeIcon icon={faGear} />,
-        title: 'Setting',
-        to: '/setting'
-    },
-    ...MENU_ITEM,
     {
         icon: <FontAwesomeIcon icon={faSignOut} />,
         title: 'Log Out',
@@ -62,18 +53,22 @@ const userMenu = [
 ];
 
 function Header() {
-    const currentUser = {
-        name: 'Doan Dinh Dong',
-        avatar: 'https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/53bd7e990293727d1645f0adbc57cc6e~c5_100x100.jpeg?x-expires=1672495200&x-signature=23wLLLFaNOwTshJdI68Og0mwrbo%3D'
-    };
+    const [isProfileModalOpen, setProfileModalOpen] = useState(false);
     const { user, logout } = useUser();
     const navigate = useNavigate();
+    const currentUser = {
+        avatar: 'https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/53bd7e990293727d1645f0adbc57cc6e~c5_100x100.jpeg?x-expires=1672495200&x-signature=23wLLLFaNOwTshJdI68Og0mwrbo%3D'
+    };
     const handleMenuChange = (menuItem) => {
         if (menuItem.title === 'Log Out') {
             logout();
             navigate('/');
         }
+        else if (menuItem.title === 'View Profile') {
+            setProfileModalOpen(true);
+        }
     };
+
 
 
     return (
@@ -95,6 +90,7 @@ function Header() {
                     </Menu>
                 </div>
             </div>
+            <UpdateProfileUser isOpen={isProfileModalOpen} onClose={() => setProfileModalOpen(false)} />
         </header>
     );
 }

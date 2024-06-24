@@ -3,55 +3,91 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    // border: 1px solid #1f1b1b;
-    // width: 500px;
-    // height: 500px;
-    background-color: rgba(189, 158, 190, 0.441);
-    // align-items: center;
-    // display: flex;
-    // /* justify-content: space-around; */
-    flex-wrap: wrap;
-    // align-content: space-around;
-    flex-direction: column;
-    // padding: 5px 20px;
+    background-color: #2c3e50; /* Dark background color */
 }
 
 .login {
-    width: 300px; /* Độ rộng của form */
-    padding: 20px;
-    height: 300px;
-    border: 1px solid #a09999;
-    border-radius: 5px;
-    margin-top: 20px;
+    width: 400px;
+    padding: 40px;
+    background-color: #34495e; /* Slightly lighter dark color for the form background */
+    border: 1px solid #1a252f;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 24px;
+    color: #ecf0f1; /* Light color for the text */
+}
+
+.login label {
+    color: #ecf0f1; /* Light color for the labels */
+    align-self: flex-start;
+    margin-bottom: 8px;
+}
+
+.login div {
+    width: 100%; /* Make sure input container takes full width */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .login input {
-    width: 100%;
+    width: calc(100% - 24px); /* Ensure input takes full width of its container, accounting for padding */
     margin-bottom: 20px;
-    margin-top: 3px;
-    padding: 8px;
+    padding: 12px;
+    border: 1px solid #d1d1d1;
+    border-radius: 4px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+    background-color: #ecf0f1; /* Light background for the input fields */
+    color: #2c3e50; /* Dark text color for the input fields */
+}
+
+.login input:focus {
+    border-color: #3498db; /* Blue border color on focus */
+    outline: none;
 }
 
 .login button {
-    width: 100%;
-    padding: 10px;
-    background-color: #5880ab; /* Màu nền của nút */
-    color: white; /* Màu chữ */
+    width: 100%; /* Ensure button takes full width of its container */
+    padding: 14px;
+    background-color: #3498db; /* Blue background color for the button */
+    color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
+    justify-content: center;
     cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+    box-sizing: border-box; /* Ensure box-sizing is consistent */
 }
 
 .login button:hover {
-    background-color: #0056b3; /* Màu nền khi di chuột qua */
+    background-color: #2980b9; /* Darker blue on hover */
 }
 
-.input {
-    padding: 5px 0 0 10px;
-}
-
-.sub-register {
-    margin-top: 5px;
+.login .sub-register {
+    margin-top: 10px;
     display: flex;
     justify-content: space-between;
+    width: 100%;
+}
+
+.login .sub-register a {
+    color: #3498db; /* Blue color for the links */
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s;
+}
+
+.login .sub-register a:hover {
+    color: #2980b9; /* Darker blue on hover */
 }

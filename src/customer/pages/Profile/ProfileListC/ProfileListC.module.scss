@@ -1,0 +1,150 @@
+/* ProfileList.module.scss */
+
+.profileList {
+    margin-top: 20px;
+    position: relative;
+}
+
+.profileList h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.profileList table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.profileList th,
+.profileList td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.profileList th {
+    background-color: #e6e6ff; /* Màu tím nhạt cho tiêu đề */
+}
+
+.profileList tbody tr:hover {
+    background-color: #f2f2f2;
+}
+
+// /* Tùy chỉnh màu cho từng cột */
+// .profileList .id {
+//     color: #0066cc;
+// }
+// .profileList .isdn {
+//     color: #ff0000;
+// }
+// .profileList .reasonName {
+//     color: #008000;
+// }
+// .profileList .actionDescription {
+//     color: #ffa500;
+// }
+// .profileList .userCollect {
+//     color: #800080;
+// }
+// .profileList .shopCollect {
+//     color: #0000ff;
+// }
+// .profileList .isFullFile {
+//     color: #ff00ff;
+// }
+// .profileList .actionStatus {
+//     color: #00cc00;
+// }
+// .profileList .auditReview {
+//     color: #ff6600;
+// }
+// .profileList .createDate {
+//     color: #663300;
+// }
+// .profileList .updateDate {
+//     color: #333333;
+// }
+// .profileList .status {
+//     color: #990000;
+// }
+// .profileList .subStatus {
+//     color: #000099;
+// }
+// .profileList .auditor {
+//     color: #cccc00;
+// }
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.pagination button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #0066cc;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+}
+
+.pagination button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.editButton,
+.deleteButton {
+    background-color: transparent; /* Nền trong suốt */
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-right: 5px;
+    font-size: 14px; /* Kích thước của biểu tượng nhỏ hơn */
+}
+
+.editButton {
+    color: #4caf50; /* Màu xanh lá cây cho biểu tượng Edit */
+}
+
+.deleteButton {
+    color: #f44336; /* Màu đỏ cho biểu tượng Delete */
+}
+
+.editButton:hover,
+.deleteButton:hover {
+    opacity: 0.8;
+}
+
+// .actions {
+//     display: flex;
+//     align-items: center; /* Đảm bảo các nút nằm ngang hàng nhau */
+// }
+.loading {
+    position: absolute; /* Đặt vị trí tuyệt đối để che phủ phần nội dung */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(249, 243, 243, 0.4); /* Màu nền với độ mờ */
+    display: flex; /* Hiển thị phần nội dung ở dạng dọc */
+    justify-content: center; /* Căn chỉnh theo chiều ngang */
+    align-items: center; /* Căn chỉnh theo chiều dọc */
+    z-index: 999; /* Để chắc chắn phần loading hiển thị trên các thành phần khác */
+}
+
+.loading .spinner {
+    font-size: 4rem; /* Kích thước biểu tượng */
+    color: rgb(217, 52, 52); /* Màu chữ */
+    animation: spin 1s linear infinite; /* Hiệu ứng quay */
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
